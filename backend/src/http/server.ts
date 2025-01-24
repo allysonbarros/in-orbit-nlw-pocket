@@ -1,4 +1,6 @@
 import fastify from 'fastify'
+import cors from '@fastify/cors'
+
 import {
   serializerCompiler,
   validatorCompiler,
@@ -11,6 +13,9 @@ import { getPendingGoalsRoute } from './routes/get-pending-goals'
 import { getWeekSummaryRoute } from './routes/get-week-summary'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
+app.register(cors, {
+  origin: '*',
+})
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
